@@ -123,6 +123,18 @@ This started as a cute Tamagotchi clone and evolved into a psychological horror 
 
 The fact that it's actually fun to play is concerning for all of us.
 
+## Future Plans
+
+📱 **Mobile App Coming Soon!**
+
+We're working on bringing this chaos to iOS and Android with:
+- Pixel art graphics
+- Touch controls
+- Cloud saves
+- And more suffering!
+
+See `/private/` directory for development roadmap (if you have access).
+
 ## Life Lessons Learned
 
 According to the game: **0**
