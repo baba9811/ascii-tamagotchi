@@ -17,3 +17,6 @@ wheels/
 *.secret
 .env.local
 .env.production
+
+# Claude commands (project-specific)
+.claude/
