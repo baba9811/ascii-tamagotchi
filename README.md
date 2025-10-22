@@ -6,8 +6,11 @@
 ![Status](https://img.shields.io/badge/status-unhinged-red.svg)
 ![Chaos Level](https://img.shields.io/badge/chaos%20level-MAXIMUM-ff0000.svg)
 ![Life Lessons](https://img.shields.io/badge/life%20lessons-0-lightgrey.svg)
+![Languages](https://img.shields.io/badge/languages-English%20%7C%20%ED%95%9C%EA%B5%AD%EC%96%B4-brightgreen.svg)
 
 The most dysfunctional virtual pet simulator ever created. Because regular Tamagotchi was too wholesome.
+
+**Now available in English and Korean! (영어와 한국어 지원!)**
 
 ## What Fresh Hell Is This?
 
