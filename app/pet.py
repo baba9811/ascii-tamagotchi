@@ -136,11 +136,11 @@ class ChaoticPet:
     def feed(self, food: str) -> str:
         """Feed the pet"""
         if not self.alive:
-            return "Your pet is... not hungry anymore 💀"
+            return self.lang.get('pet_dead_cant_feed')
 
         cost = 10
         if self.money < cost:
-            return f"You're broke! Can't afford {food}! 💸"
+            return self.lang.get('pet_broke', food=food)
 
         self.money -= cost
         self.hunger = max(0, self.hunger - random.randint(20, 35))
@@ -154,7 +154,7 @@ class ChaoticPet:
         ]
 
         if self.is_rebellious and random.random() < 0.3:
-            messages = [f"{self.name} threw the {food} at you! 'I HATE YOU!' 😡"]
+            messages = [self.lang.get('pet_rebellious_food', name=self.name, food=food)]
             self.happiness = max(0, self.happiness - 10)
 
         self.update_mood()
@@ -213,13 +213,13 @@ class ChaoticPet:
     def clean_poop(self) -> str:
         """Clean up the poop"""
         if self.poop_count == 0:
-            return "There's no poop to clean! (Yet...)"
+            return self.lang.get('no_poop')
 
         old_count = self.poop_count
         self.poop_count = 0
         self.happiness = min(100, self.happiness + 15)
 
-        return f"You cleaned up {old_count} poops! 💩 {self.name} is happy now!"
+        return self.lang.get('cleaned_poop', count=old_count, name=self.name)
 
     def use_vice(self, vice: str) -> str:
         """Use a vice for temporary happiness"""
