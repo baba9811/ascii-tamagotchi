@@ -176,7 +176,8 @@ def run_game():
     console.print(f"\n[bold green]{lang.get('wild_creature')}[/bold green]\n")
     time.sleep(0.5)
 
-    name = Prompt.ask(f"[yellow]{lang.get('name_prompt')}[/yellow]", default="Fluffy" if lang_code == "en" else "복실이")
+    default_name = "Fluffy" if lang_code == "en" else "복실이" if lang_code == "ko" else "小毛"
+    name = Prompt.ask(f"[yellow]{lang.get('name_prompt')}[/yellow]", default=default_name)
 
     pet = ChaoticPet(name, lang)
 

@@ -6,11 +6,11 @@
 ![Status](https://img.shields.io/badge/status-unhinged-red.svg)
 ![Chaos Level](https://img.shields.io/badge/chaos%20level-MAXIMUM-ff0000.svg)
 ![Life Lessons](https://img.shields.io/badge/life%20lessons-0-lightgrey.svg)
-![Languages](https://img.shields.io/badge/languages-English%20%7C%20%ED%95%9C%EA%B5%AD%EC%96%B4-brightgreen.svg)
+![Languages](https://img.shields.io/badge/languages-EN%20%7C%20KO%20%7C%20ZH-brightgreen.svg)
 
 The most dysfunctional virtual pet simulator ever created. Because regular Tamagotchi was too wholesome.
 
-**Now available in English and Korean! (영어와 한국어 지원!)**
+**Now available in 3 languages! English | 한국어 | 中文**
 
 ## What Fresh Hell Is This?
 
@@ -30,8 +30,9 @@ It's basically a life simulator. You know, for fun!
 ## Features That Will Haunt You
 
 ### Language Support
-- 🌍 **Bilingual Interface** - Play in English or Korean (영어 또는 한국어로 플레이)
+- 🌍 **Trilingual Interface** - Play in English, Korean, or Chinese (英语 | 한국어 | 中文)
 - 🎯 **Fully Localized** - All messages, menus, and death screens translated
+- 🎮 **Seamless Switching** - Choose your language at startup
 
 ### Basic Survival (The Easy Part)
 - 🍕 **Feed** ($10) - Keep them alive... if you can afford it
@@ -72,7 +73,7 @@ uv run python main.py
 
 ## How to Play (And Fail)
 
-1. Choose your language (English or 한국어)
+1. Choose your language (English | 한국어 | 中文)
 2. Name your pet (RIP in advance)
 3. Each turn, choose an action from 11 options
 4. Watch as time passes and everything spirals out of control
