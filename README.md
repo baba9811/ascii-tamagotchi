@@ -46,8 +46,8 @@ Make sure you have Python 3.12+ and [uv](https://github.com/astral-sh/uv) instal
 
 ```bash
 # Clone the repo
-git clone https://github.com/yourusername/terminal-pet-simulator.git
-cd terminal-pet-simulator
+git clone https://github.com/yourusername/ascii-tamagotchi.git
+cd ascii-tamagotchi
 
 # Install dependencies with uv
 uv sync
