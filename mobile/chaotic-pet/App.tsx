@@ -1,7 +1,10 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, TouchableOpacity, ScrollView } from 'react-native';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useGameStore } from './src/stores/gameStore';
+import SelectModal from './src/components/SelectModal';
+import InputModal from './src/components/InputModal';
+import { ViceType } from './src/models/Pet';
 
 export default function App() {
   const {
@@ -14,10 +17,21 @@ export default function App() {
     sleepPet,
     cleanPoop,
     work,
+    useVice,
+    gamble,
+    takeLoan,
+    usePhone,
+    findPartner,
+    resetGame,
     tick,
     getPetStats,
     isGameActive,
   } = useGameStore();
+
+  // Modal states
+  const [viceModalVisible, setViceModalVisible] = useState(false);
+  const [gambleModalVisible, setGambleModalVisible] = useState(false);
+  const [loanModalVisible, setLoanModalVisible] = useState(false);
 
   // Initialize game on mount
   useEffect(() => {
@@ -140,6 +154,48 @@ export default function App() {
           >
             <Text style={styles.actionText}>💼 Work</Text>
           </TouchableOpacity>
+
+          <TouchableOpacity
+            style={styles.actionButton}
+            onPress={() => setViceModalVisible(true)}
+          >
+            <Text style={styles.actionText}>🍺 Vice ($15)</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            style={styles.actionButton}
+            onPress={() => setGambleModalVisible(true)}
+          >
+            <Text style={styles.actionText}>🎰 Gamble</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            style={styles.actionButton}
+            onPress={() => setLoanModalVisible(true)}
+          >
+            <Text style={styles.actionText}>💸 Take Loan</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            style={styles.actionButton}
+            onPress={() => handleAction(usePhone)}
+          >
+            <Text style={styles.actionText}>📱 Use Phone</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            style={styles.actionButton}
+            onPress={() => handleAction(findPartner)}
+          >
+            <Text style={styles.actionText}>❤️ Find Partner</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            style={[styles.actionButton, styles.quitButton]}
+            onPress={() => resetGame()}
+          >
+            <Text style={styles.actionText}>🚪 Quit Game</Text>
+          </TouchableOpacity>
         </ScrollView>
       )}
 
@@ -160,6 +216,42 @@ export default function App() {
           </TouchableOpacity>
         </View>
       )}
+
+      {/* Modals */}
+      <SelectModal
+        visible={viceModalVisible}
+        title="Choose Your Vice"
+        options={[
+          { label: 'Beer', value: 'beer', emoji: '🍺' },
+          { label: 'Cigarette', value: 'cigarette', emoji: '🚬' },
+          { label: 'Pill', value: 'pill', emoji: '💊' },
+        ]}
+        onSelect={(value) => {
+          handleAction(() => useVice(value as ViceType));
+        }}
+        onClose={() => setViceModalVisible(false)}
+      />
+
+      <InputModal
+        visible={gambleModalVisible}
+        title="How much to gamble?"
+        description="40% chance to double your bet!"
+        maxValue={stats?.money || 0}
+        onConfirm={(amount) => {
+          handleAction(() => gamble(amount));
+        }}
+        onClose={() => setGambleModalVisible(false)}
+      />
+
+      <InputModal
+        visible={loanModalVisible}
+        title="How much to borrow?"
+        description="Debt compounds at 10% per turn!"
+        onConfirm={(amount) => {
+          handleAction(() => takeLoan(amount));
+        }}
+        onClose={() => setLoanModalVisible(false)}
+      />
     </View>
   );
 }
@@ -271,6 +363,10 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontSize: 16,
     fontWeight: 'bold',
+  },
+  quitButton: {
+    backgroundColor: '#555',
+    marginTop: 10,
   },
   deathContainer: {
     flex: 1,
