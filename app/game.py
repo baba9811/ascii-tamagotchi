@@ -160,14 +160,15 @@ def run_game():
     # Language selection
     console.clear()
     console.print(Panel.fit(
-        "[bold cyan]Choose Language / 언어 선택[/bold cyan]\n\n"
+        "[bold cyan]Choose Language / 언어 선택 / 选择语言[/bold cyan]\n\n"
         "1. English\n"
-        "2. 한국어 (Korean)",
+        "2. 한국어 (Korean)\n"
+        "3. 中文 (Chinese)",
         border_style="cyan"
     ))
-    lang_choice = Prompt.ask("Language / 언어", choices=["1", "2"], default="1")
+    lang_choice = Prompt.ask("Language / 언어 / 语言", choices=["1", "2", "3"], default="1")
 
-    lang_code = "en" if lang_choice == "1" else "ko"
+    lang_code = "en" if lang_choice == "1" else "ko" if lang_choice == "2" else "zh"
     lang = Lang(lang_code)
 
     show_intro(lang)
