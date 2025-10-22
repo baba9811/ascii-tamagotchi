@@ -5,6 +5,7 @@ Pet class - The chaotic creature itself
 import random
 from rich.text import Text
 from rich.panel import Panel
+from app.lang import Lang
 
 
 class ChaoticPet:
@@ -29,8 +30,9 @@ class ChaoticPet:
     TOYS = ["🎾 ball", "🧸 teddy", "🎮 game", "🎨 art", "📚 book"]
     VICES = ["🍺 beer", "🚬 cigarette", "💊 mystery pill"]
 
-    def __init__(self, name: str):
+    def __init__(self, name: str, lang: Lang = None):
         self.name = name
+        self.lang = lang or Lang("en")
 
         # Basic stats
         self.hunger = 50
