@@ -72,16 +72,17 @@ uv run python main.py
 
 ## How to Play (And Fail)
 
-1. Name your pet (RIP in advance)
-2. Each turn, choose an action from 11 options
-3. Watch as time passes and everything spirals out of control
-4. Try to balance:
+1. Choose your language (English or 한국어)
+2. Name your pet (RIP in advance)
+3. Each turn, choose an action from 11 options
+4. Watch as time passes and everything spirals out of control
+5. Try to balance:
    - Hunger, Happiness, Energy (basic)
    - Money, Debt, Depression (advanced)
    - Addiction, Phone usage, Poop count (chaos)
-5. Inevitably fail and watch them die
-6. Reflect on your choices
-7. Play again
+6. Inevitably fail and watch them die
+7. Reflect on your choices
+8. Play again
 
 ## Pro Tips (They Won't Save You)
 
