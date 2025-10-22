@@ -29,6 +29,10 @@ It's basically a life simulator. You know, for fun!
 
 ## Features That Will Haunt You
 
+### Language Support
+- 🌍 **Bilingual Interface** - Play in English or Korean (영어 또는 한국어로 플레이)
+- 🎯 **Fully Localized** - All messages, menus, and death screens translated
+
 ### Basic Survival (The Easy Part)
 - 🍕 **Feed** ($10) - Keep them alive... if you can afford it
 - 🎾 **Play** - Try to cheer them up (good luck with that)
