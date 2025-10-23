@@ -5,6 +5,7 @@
 
 import { create } from 'zustand';
 import { Pet, PetStats, FoodType, ToyType, ViceType } from '../models/Pet';
+import { saveGame, loadGame, deleteSavedGame } from '../utils/storage';
 
 interface GameStore {
   // State
@@ -14,6 +15,7 @@ interface GameStore {
 
   // Actions
   initGame: (petName: string) => void;
+  loadSavedGame: () => Promise<boolean>;
   feedPet: (food: FoodType) => void;
   playWithPet: (toy: ToyType) => void;
   sleepPet: () => void;
@@ -26,6 +28,7 @@ interface GameStore {
   findPartner: () => void;
   tick: () => void;
   resetGame: () => void;
+  saveCurrentGame: () => Promise<boolean>;
 
   // Getters
   getPetStats: () => PetStats | null;
@@ -46,6 +49,29 @@ export const useGameStore = create<GameStore>((set, get) => ({
       turn: 0,
       lastMessage: `Welcome, ${petName}! Let the chaos begin!`,
     });
+    // Auto-save after init
+    saveGame(newPet, 0, `Welcome, ${petName}! Let the chaos begin!`);
+  },
+
+  // Load saved game
+  loadSavedGame: async () => {
+    const savedState = await loadGame();
+    if (!savedState) {
+      return false;
+    }
+
+    // Reconstruct Pet instance from saved data
+    const restoredPet = new Pet(savedState.pet.name);
+    restoredPet.stats = savedState.pet.stats;
+
+    set({
+      pet: restoredPet,
+      turn: savedState.turn,
+      lastMessage: savedState.lastMessage,
+    });
+
+    console.log('[GameStore] Game loaded successfully');
+    return true;
   },
 
   // Feed action
@@ -140,11 +166,15 @@ export const useGameStore = create<GameStore>((set, get) => ({
 
   // Tick (time passes)
   tick: () => {
-    const { pet, turn } = get();
+    const { pet, turn, lastMessage } = get();
     if (!pet) return;
 
     pet.tick();
-    set({ turn: turn + 1 });
+    const newTurn = turn + 1;
+    set({ turn: newTurn });
+
+    // Auto-save after each turn
+    saveGame(pet, newTurn, lastMessage);
   },
 
   // Reset game
@@ -154,6 +184,14 @@ export const useGameStore = create<GameStore>((set, get) => ({
       turn: 0,
       lastMessage: '',
     });
+    // Delete saved game
+    deleteSavedGame();
+  },
+
+  // Manual save
+  saveCurrentGame: async () => {
+    const { pet, turn, lastMessage } = get();
+    return await saveGame(pet, turn, lastMessage);
   },
 
   // Getters

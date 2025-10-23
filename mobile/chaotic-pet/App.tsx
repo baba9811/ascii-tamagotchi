@@ -12,6 +12,7 @@ export default function App() {
     turn,
     lastMessage,
     initGame,
+    loadSavedGame,
     feedPet,
     playWithPet,
     sleepPet,
@@ -32,12 +33,22 @@ export default function App() {
   const [viceModalVisible, setViceModalVisible] = useState(false);
   const [gambleModalVisible, setGambleModalVisible] = useState(false);
   const [loanModalVisible, setLoanModalVisible] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
-  // Initialize game on mount
+  // Initialize game on mount - try to load saved game first
   useEffect(() => {
-    if (!pet) {
-      initGame('Fluffy');
-    }
+    const initializeGame = async () => {
+      if (!pet) {
+        const loaded = await loadSavedGame();
+        if (!loaded) {
+          // No saved game, start new game
+          initGame('Fluffy');
+        }
+      }
+      setIsLoading(false);
+    };
+
+    initializeGame();
   }, []);
 
   const stats = getPetStats();
@@ -48,10 +59,10 @@ export default function App() {
     tick(); // Time passes after each action
   };
 
-  if (!stats) {
+  if (isLoading || !stats) {
     return (
       <View style={styles.container}>
-        <Text>Loading...</Text>
+        <Text style={styles.loadingText}>Loading...</Text>
       </View>
     );
   }
@@ -367,6 +378,10 @@ const styles = StyleSheet.create({
   quitButton: {
     backgroundColor: '#555',
     marginTop: 10,
+  },
+  loadingText: {
+    color: '#fff',
+    fontSize: 18,
   },
   deathContainer: {
     flex: 1,
