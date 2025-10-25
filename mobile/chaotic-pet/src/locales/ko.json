@@ -110,5 +110,14 @@
   "howMuchLoan": "얼마 빌릴래?",
   "loanDescription": "턴마다 10% 이자 복리!",
   "cancel": "취소",
-  "confirm": "확인"
+  "confirm": "확인",
+
+  "nameYourPet": "펫 이름 정하기",
+  "enterName": "펫 이름 입력...",
+  "random": "랜덤",
+  "start": "게임 시작",
+  "nameHint": "비워두면 기본 이름 \"Fluffy\"",
+  "causeOfDeath": "사망 원인",
+  "mainMenu": "메인 메뉴",
+  "deathQuote": "인생은 짧고, 혼돈은 영원하다."
 }

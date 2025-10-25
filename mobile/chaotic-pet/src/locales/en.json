@@ -110,5 +110,14 @@
   "howMuchLoan": "How much to borrow?",
   "loanDescription": "Debt compounds at 10% per turn!",
   "cancel": "Cancel",
-  "confirm": "Confirm"
+  "confirm": "Confirm",
+
+  "nameYourPet": "Name Your Pet",
+  "enterName": "Enter pet name...",
+  "random": "Random",
+  "start": "Start Game",
+  "nameHint": "Leave blank for default name \"Fluffy\"",
+  "causeOfDeath": "Cause of Death",
+  "mainMenu": "Main Menu",
+  "deathQuote": "Life is fleeting, chaos is eternal."
 }

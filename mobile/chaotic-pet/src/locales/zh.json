@@ -110,5 +110,14 @@
   "howMuchLoan": "借多少钱？",
   "loanDescription": "每回合10%复利！",
   "cancel": "取消",
-  "confirm": "确认"
+  "confirm": "确认",
+
+  "nameYourPet": "给宠物取名",
+  "enterName": "输入宠物名字...",
+  "random": "随机",
+  "start": "开始游戏",
+  "nameHint": "留空使用默认名字 \"Fluffy\"",
+  "causeOfDeath": "死因",
+  "mainMenu": "主菜单",
+  "deathQuote": "生命短暂，混乱永恒。"
 }
