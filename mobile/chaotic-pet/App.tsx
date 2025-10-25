@@ -1,12 +1,15 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, TouchableOpacity, ScrollView } from 'react-native';
 import { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useGameStore } from './src/stores/gameStore';
 import SelectModal from './src/components/SelectModal';
 import InputModal from './src/components/InputModal';
-import { ViceType } from './src/models/Pet';
+import { ViceType, FoodType, ToyType } from './src/models/Pet';
+import './src/i18n'; // Initialize i18n
 
 export default function App() {
+  const { t } = useTranslation();
   const {
     pet,
     turn,
@@ -30,6 +33,8 @@ export default function App() {
   } = useGameStore();
 
   // Modal states
+  const [feedModalVisible, setFeedModalVisible] = useState(false);
+  const [playModalVisible, setPlayModalVisible] = useState(false);
   const [viceModalVisible, setViceModalVisible] = useState(false);
   const [gambleModalVisible, setGambleModalVisible] = useState(false);
   const [loanModalVisible, setLoanModalVisible] = useState(false);
@@ -62,7 +67,7 @@ export default function App() {
   if (isLoading || !stats) {
     return (
       <View style={styles.container}>
-        <Text style={styles.loadingText}>Loading...</Text>
+        <Text style={styles.loadingText}>{t('loading')}</Text>
       </View>
     );
   }
@@ -71,19 +76,19 @@ export default function App() {
     <View style={styles.container}>
       <StatusBar style="light" />
 
-      <Text style={styles.title}>🎮 Chaotic Pet 🎮</Text>
+      <Text style={styles.title}>🎮 {t('title')} 🎮</Text>
 
       {/* Pet Display */}
       <View style={styles.petContainer}>
         <Text style={styles.petFace}>{stats.alive ? '(◕‿◕)' : '(✖╭╮✖)'}</Text>
-        <Text style={styles.petName}>{pet?.name} (Age: {stats.age})</Text>
+        <Text style={styles.petName}>{pet?.name} ({t('age')}: {stats.age})</Text>
         <Text style={styles.petMood}>Status: {stats.mood.toUpperCase()}</Text>
       </View>
 
       {/* Stats */}
       <View style={styles.statsContainer}>
         <View style={styles.statRow}>
-          <Text style={styles.statLabel}>🍔 Hunger:</Text>
+          <Text style={styles.statLabel}>🍔 {t('hunger')}:</Text>
           <View style={styles.statBar}>
             <View style={[styles.statFill, {
               width: `${stats.hunger}%`,
@@ -94,7 +99,7 @@ export default function App() {
         </View>
 
         <View style={styles.statRow}>
-          <Text style={styles.statLabel}>😊 Happiness:</Text>
+          <Text style={styles.statLabel}>😊 {t('happiness')}:</Text>
           <View style={styles.statBar}>
             <View style={[styles.statFill, {
               width: `${stats.happiness}%`,
@@ -105,7 +110,7 @@ export default function App() {
         </View>
 
         <View style={styles.statRow}>
-          <Text style={styles.statLabel}>⚡ Energy:</Text>
+          <Text style={styles.statLabel}>⚡ {t('energy')}:</Text>
           <View style={styles.statBar}>
             <View style={[styles.statFill, {
               width: `${stats.energy}%`,
@@ -117,15 +122,15 @@ export default function App() {
 
         <View style={styles.infoRow}>
           <Text style={styles.infoText}>💰 ${stats.money}</Text>
-          <Text style={styles.infoText}>💸 Debt: ${stats.debt}</Text>
+          <Text style={styles.infoText}>💸 {t('debt')}: ${stats.debt}</Text>
           <Text style={styles.infoText}>💩 {stats.poopCount}</Text>
         </View>
       </View>
 
       {/* Turn & Message */}
       <View style={styles.messageContainer}>
-        <Text style={styles.turnText}>Turn {turn}</Text>
-        <Text style={styles.messageText}>{lastMessage || 'What will you do?'}</Text>
+        <Text style={styles.turnText}>{t('turn', { turn })}</Text>
+        <Text style={styles.messageText}>{lastMessage || t('menuTitle')}</Text>
       </View>
 
       {/* Action Buttons */}
@@ -133,109 +138,142 @@ export default function App() {
         <ScrollView style={styles.actionsContainer}>
           <TouchableOpacity
             style={styles.actionButton}
-            onPress={() => handleAction(() => feedPet('pizza'))}
+            onPress={() => setFeedModalVisible(true)}
           >
-            <Text style={styles.actionText}>🍕 Feed ($10)</Text>
+            <Text style={styles.actionText}>{t('feed')}</Text>
           </TouchableOpacity>
 
           <TouchableOpacity
             style={styles.actionButton}
-            onPress={() => handleAction(() => playWithPet('ball'))}
+            onPress={() => setPlayModalVisible(true)}
           >
-            <Text style={styles.actionText}>🎾 Play</Text>
+            <Text style={styles.actionText}>{t('play')}</Text>
           </TouchableOpacity>
 
           <TouchableOpacity
             style={styles.actionButton}
             onPress={() => handleAction(sleepPet)}
           >
-            <Text style={styles.actionText}>😴 Sleep</Text>
+            <Text style={styles.actionText}>{t('sleep')}</Text>
           </TouchableOpacity>
 
           <TouchableOpacity
             style={styles.actionButton}
             onPress={() => handleAction(cleanPoop)}
           >
-            <Text style={styles.actionText}>💩 Clean Poop</Text>
+            <Text style={styles.actionText}>{t('clean')}</Text>
           </TouchableOpacity>
 
           <TouchableOpacity
             style={styles.actionButton}
             onPress={() => handleAction(work)}
           >
-            <Text style={styles.actionText}>💼 Work</Text>
+            <Text style={styles.actionText}>{t('work')}</Text>
           </TouchableOpacity>
 
           <TouchableOpacity
             style={styles.actionButton}
             onPress={() => setViceModalVisible(true)}
           >
-            <Text style={styles.actionText}>🍺 Vice ($15)</Text>
+            <Text style={styles.actionText}>{t('vice')}</Text>
           </TouchableOpacity>
 
           <TouchableOpacity
             style={styles.actionButton}
             onPress={() => setGambleModalVisible(true)}
           >
-            <Text style={styles.actionText}>🎰 Gamble</Text>
+            <Text style={styles.actionText}>{t('gamble')}</Text>
           </TouchableOpacity>
 
           <TouchableOpacity
             style={styles.actionButton}
             onPress={() => setLoanModalVisible(true)}
           >
-            <Text style={styles.actionText}>💸 Take Loan</Text>
+            <Text style={styles.actionText}>{t('loan')}</Text>
           </TouchableOpacity>
 
           <TouchableOpacity
             style={styles.actionButton}
             onPress={() => handleAction(usePhone)}
           >
-            <Text style={styles.actionText}>📱 Use Phone</Text>
+            <Text style={styles.actionText}>{t('phone')}</Text>
           </TouchableOpacity>
 
           <TouchableOpacity
             style={styles.actionButton}
             onPress={() => handleAction(findPartner)}
           >
-            <Text style={styles.actionText}>❤️ Find Partner</Text>
+            <Text style={styles.actionText}>{t('partner')}</Text>
           </TouchableOpacity>
 
           <TouchableOpacity
             style={[styles.actionButton, styles.quitButton]}
             onPress={() => resetGame()}
           >
-            <Text style={styles.actionText}>🚪 Quit Game</Text>
+            <Text style={styles.actionText}>{t('quit')}</Text>
           </TouchableOpacity>
         </ScrollView>
       )}
 
       {!active && (
         <View style={styles.deathContainer}>
-          <Text style={styles.deathText}>💀 Game Over 💀</Text>
+          <Text style={styles.deathText}>💀 {t('gameOver')} 💀</Text>
           <Text style={styles.deathReason}>
             Cause: {pet?.getDeathReason()}
           </Text>
           <Text style={styles.deathStats}>
-            Survived {stats.age} turns
+            {t('survived', { age: stats.age })}
           </Text>
           <TouchableOpacity
             style={styles.restartButton}
             onPress={() => initGame('Fluffy')}
           >
-            <Text style={styles.restartText}>🔄 Restart</Text>
+            <Text style={styles.restartText}>🔄 {t('restart')}</Text>
           </TouchableOpacity>
         </View>
       )}
 
       {/* Modals */}
       <SelectModal
-        visible={viceModalVisible}
-        title="Choose Your Vice"
+        visible={feedModalVisible}
+        title={t('feedPrompt')}
         options={[
-          { label: 'Beer', value: 'beer', emoji: '🍺' },
-          { label: 'Cigarette', value: 'cigarette', emoji: '🚬' },
-          { label: 'Pill', value: 'pill', emoji: '💊' },
+          { label: t('pizza'), value: 'pizza', emoji: '🍕' },
+          { label: t('burger'), value: 'burger', emoji: '🍔' },
+          { label: t('apple'), value: 'apple', emoji: '🍎' },
+          { label: t('cake'), value: 'cake', emoji: '🍰' },
+          { label: t('carrot'), value: 'carrot', emoji: '🥕' },
+          { label: t('sushi'), value: 'sushi', emoji: '🍣' },
+        ]}
+        onSelect={(value) => {
+          handleAction(() => feedPet(value as FoodType));
+        }}
+        onClose={() => setFeedModalVisible(false)}
+      />
+
+      <SelectModal
+        visible={playModalVisible}
+        title={t('toyPrompt')}
+        options={[
+          { label: t('ball'), value: 'ball', emoji: '🎾' },
+          { label: t('teddy'), value: 'teddy', emoji: '🧸' },
+          { label: t('game'), value: 'game', emoji: '🎮' },
+          { label: t('art'), value: 'art', emoji: '🎨' },
+          { label: t('book'), value: 'book', emoji: '📚' },
+        ]}
+        onSelect={(value) => {
+          handleAction(() => playWithPet(value as ToyType));
+        }}
+        onClose={() => setPlayModalVisible(false)}
+      />
+
+      <SelectModal
+        visible={viceModalVisible}
+        title={t('chooseVice')}
+        options={[
+          { label: t('beer'), value: 'beer', emoji: '🍺' },
+          { label: t('cigarette'), value: 'cigarette', emoji: '🚬' },
+          { label: t('pill'), value: 'pill', emoji: '💊' },
         ]}
         onSelect={(value) => {
           handleAction(() => useVice(value as ViceType));
@@ -245,8 +283,8 @@ export default function App() {
 
       <InputModal
         visible={gambleModalVisible}
-        title="How much to gamble?"
-        description="40% chance to double your bet!"
+        title={t('howMuchGamble')}
+        description={t('gambleDescription')}
         maxValue={stats?.money || 0}
         onConfirm={(amount) => {
           handleAction(() => gamble(amount));
@@ -256,8 +294,8 @@ export default function App() {
 
       <InputModal
         visible={loanModalVisible}
-        title="How much to borrow?"
-        description="Debt compounds at 10% per turn!"
+        title={t('howMuchLoan')}
+        description={t('loanDescription')}
         onConfirm={(amount) => {
           handleAction(() => takeLoan(amount));
         }}
