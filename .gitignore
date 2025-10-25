@@ -20,3 +20,4 @@ wheels/
 
 # Claude commands (project-specific)
 .claude/
+say_to_claude.md
