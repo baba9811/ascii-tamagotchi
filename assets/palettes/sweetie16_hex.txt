@@ -1,0 +1,37 @@
+# Sweetie 16 Color Palette
+# Source: https://lospec.com/palette-list/sweetie-16
+# Created by GrafxKid
+# 16 colors - Perfect for retro pixel art
+
+# Row 1 (Darks & Neutrals)
+1a1c2c  # Black - outlines
+5d275d  # Dark Purple - shadows
+b13e53  # Dark Red - accents
+ef7d57  # Orange - warm highlights
+
+# Row 2 (Warm Tones)
+ffcd75  # Light Yellow - highlights
+a7f070  # Light Green - health/happy
+38b764  # Green - plants, food
+257179  # Teal - water, calm
+
+# Row 3 (Cool Tones)
+29366f  # Dark Blue - night, sad
+3b5dc9  # Blue - UI elements
+41a6f6  # Light Blue - energy, clean
+73eff7  # Cyan - sparkle effects
+
+# Row 4 (Special)
+f4f4f4  # White - eyes, highlights
+94b0c2  # Light Gray - neutral
+566c86  # Gray - shadows
+333c57  # Dark Gray - dark areas
+
+# Usage Notes:
+# - Outline: #1a1c2c
+# - Pet Base: #ffcd75 or #ef7d57
+# - Shadow: #b13e53 or #5d275d
+# - Eyes: #f4f4f4 + #1a1c2c
+# - Happy: #a7f070 accents
+# - Sad: #29366f tints
+# - Sick: #38b764 tints
