@@ -7,6 +7,7 @@ import { RootStackParamList } from '../navigation/AppNavigator';
 import { useGameStore } from '../stores/gameStore';
 import SelectModal from '../components/SelectModal';
 import InputModal from '../components/InputModal';
+import { PetSprite } from '../components/PetSprite';
 import { ViceType, FoodType, ToyType } from '../models/Pet';
 import React from 'react';
 
@@ -88,7 +89,21 @@ export default function GameScreen({ navigation, route }: Props) {
 
       {/* Pet Display */}
       <View style={styles.petContainer}>
+        {/*
+          PetSprite Component - Shows pixel art sprite when available
+          Falls back to emoji if sprite files don't exist yet
+
+          To enable: Create pet_idle.png in assets/sprites/pets/
+          and uncomment the line in PetSprite.tsx
+        */}
+        <PetSprite
+          sprite="idle"
+          width={128}
+          height={128}
+        />
+        {/* Fallback emoji display (will be hidden once sprites are ready) */}
         <Text style={styles.petFace}>{stats.alive ? '(◕‿◕)' : '(✖╭╮✖)'}</Text>
+
         <Text style={styles.petName}>{pet?.name} ({t('age')}: {stats.age})</Text>
         <Text style={styles.petMood}>Status: {stats.mood.toUpperCase()}</Text>
       </View>

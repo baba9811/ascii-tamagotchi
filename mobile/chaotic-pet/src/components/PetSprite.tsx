@@ -51,16 +51,18 @@ interface PetSpriteProps {
 /**
  * Sprite source mapping
  * Add more sprites as they are created in assets/sprites/pets/
+ *
+ * To enable: Create sprite PNG file in assets/sprites/pets/ then uncomment the line below
  */
-const SPRITE_SOURCES: Record<string, ImageSourcePropType> = {
-  // TODO: Uncomment as sprite files are created
-  // idle: require('../../assets/sprites/pets/pet_idle.png'),
-  // happy: require('../../assets/sprites/pets/pet_happy.png'),
-  // sad: require('../../assets/sprites/pets/pet_sad.png'),
-  // hungry: require('../../assets/sprites/pets/pet_hungry.png'),
-  // sleeping: require('../../assets/sprites/pets/pet_sleeping.png'),
-  // sick: require('../../assets/sprites/pets/pet_sick.png'),
-  // dead: require('../../assets/sprites/pets/pet_dead.png'),
+const SPRITE_SOURCES: Record<string, ImageSourcePropType | null> = {
+  // Uncomment each line as you create the corresponding sprite file:
+  idle: null,     // require('../../assets/sprites/pets/pet_idle.png'),
+  happy: null,    // require('../../assets/sprites/pets/pet_happy.png'),
+  sad: null,      // require('../../assets/sprites/pets/pet_sad.png'),
+  hungry: null,   // require('../../assets/sprites/pets/pet_hungry.png'),
+  sleeping: null, // require('../../assets/sprites/pets/pet_sleeping.png'),
+  sick: null,     // require('../../assets/sprites/pets/pet_sick.png'),
+  dead: null,     // require('../../assets/sprites/pets/pet_dead.png'),
 };
 
 /**
