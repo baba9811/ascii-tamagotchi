@@ -55,8 +55,9 @@ interface PetSpriteProps {
  * To enable: Create sprite PNG file in assets/sprites/pets/ then uncomment the line below
  */
 const SPRITE_SOURCES: Record<string, ImageSourcePropType | null> = {
+  // ✅ Idle sprite is now available! (Generated programmatically)
+  idle: require('../../assets/sprites/pets/pet_idle.png'),
   // Uncomment each line as you create the corresponding sprite file:
-  idle: null,     // require('../../assets/sprites/pets/pet_idle.png'),
   happy: null,    // require('../../assets/sprites/pets/pet_happy.png'),
   sad: null,      // require('../../assets/sprites/pets/pet_sad.png'),
   hungry: null,   // require('../../assets/sprites/pets/pet_hungry.png'),
